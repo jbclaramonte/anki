@@ -14,17 +14,17 @@ public class BoxesManager {
 		orangeBox = new Box();
 		redBox = new Box();
 	}
-	
-	
-	public void beginSession() {
-		
-		redBox.addCards(orangeBox.getCards());
-		orangeBox.clearCards();
-		orangeBox.addCards(greenBox.getCards());
-		greenBox.clearCards();
+
+	public Box getGreenBox() {
+		return greenBox;
 	}
-	
-	public void endSession() {
-		
+
+	public Box getOrangeBox() {
+		return orangeBox;
 	}
+
+	public Box getRedBox() {
+		return redBox;
+	}
+
 }
