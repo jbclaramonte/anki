@@ -1,23 +1,25 @@
 package com.publicissapient.anki.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Box 
 {
-	private List<Card> cardList;
+	private Set<Card> cardList;
 	
 	public Box(){
-		this.cardList = new ArrayList<Card>();
+		this.cardList = new HashSet<Card>();
 	}
 	
 	
-	public List<Card> getCards(){
+	public Set<Card> getCards(){
 		return this.cardList;
 	}
 	
 	
-	public void addCards(List<Card> cardList)
+	public void addCards(Set<Card> cardList)
 	{
 		this.cardList.addAll(cardList);
 	}
@@ -26,5 +28,10 @@ public class Box
 	public void clearCards()
 	{
 		this.cardList.clear();		
+	}
+	
+	public int size()
+	{
+		return this.cardList.size();
 	}
 }

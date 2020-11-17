@@ -3,6 +3,8 @@ package com.publicissapient.anki;
 import static org.junit.Assert.assertNotNull;
 
 import com.publicissapient.anki.domain.Card;
+import com.publicissapient.anki.domain.Deck;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,7 +37,7 @@ public class AnkiTest
 
 		// Then
 		Assert.assertEquals(1, anki.getBoxesManager().getRedBox().size());
-		Assert.assertEquals(card, anki.getBoxesManager().getRedBox().getCards().get(0));
+		Assert.assertTrue(anki.getBoxesManager().getRedBox().getCards().contains(card));
 
 	}
 
