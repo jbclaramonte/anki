@@ -1,4 +1,4 @@
-package com.publicissapient.anki.box;
+package com.publicissapient.anki.domain;
 
 public class Card {
 	

@@ -1,4 +1,4 @@
-package com.publicissapient.anki.box;
+package com.publicissapient.anki.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,6 @@ public class Box
 	
 	public void clearCards()
 	{
-		this.cardList.clear();
+		this.cardList.clear();		
 	}
 }
