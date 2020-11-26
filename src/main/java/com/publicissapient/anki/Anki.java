@@ -1,6 +1,7 @@
 package com.publicissapient.anki;
 
 import com.publicissapient.anki.domain.BoxesManager;
+import com.publicissapient.anki.domain.Card;
 import com.publicissapient.anki.domain.Deck;
 
 public class Anki
@@ -17,4 +18,7 @@ public class Anki
 		boxesManager.getRedBox().addCards(deck.getCardList());
 	}
 
+  public Card pullCard() {
+    return boxesManager.getRedBox().getCards().iterator().next();
+  }
 }
