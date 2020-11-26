@@ -83,13 +83,15 @@ public class AnkiTest
 	@Test
 	public void test_when_session_is_saved_save_interface_is_called()
 	{
-		List myList = Mockito.mock(List.class);
+		// Given
+		SessionIO sessionIO = Mockito.mock(SessionIO.class);
+		Session session = new Session(sessionPersister);
 
-		myList.add("one");
-		myList.add("one");
+		// When
+		session.save();
 
-		Mockito.verify(myList, Mockito.times(2)).add("one");
-
+		// Then
+		Mockito.verify(sessionIO, Mockito.times(1)).save(session);
 	}
 
 }
