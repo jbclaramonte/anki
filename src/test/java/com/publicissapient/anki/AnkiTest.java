@@ -1,7 +1,10 @@
 package com.publicissapient.anki;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.publicissapient.anki.domain.Card;
 import com.publicissapient.anki.domain.Deck;
@@ -54,6 +57,7 @@ public class AnkiTest
 		Assert.assertFalse(ankiSession.getBoxesManager().getGreenBox().getCards().contains(pullCard));
 	}
 
+	@Test
 	public void test_when_we_load_a_deck_for_the_first_time_a_session_is_created()
 	{
 		// Given
@@ -73,6 +77,18 @@ public class AnkiTest
 		Assert.assertEquals(2, session.getBoxesManager().getRedBox().getCards().size());
 		Assert.assertEquals(0, session.getBoxesManager().getGreenBox().getCards().size());
 		Assert.assertEquals(0, session.getBoxesManager().getOrangeBox().getCards().size());
+
+	}
+
+	@Test
+	public void test_when_session_is_saved_save_interface_is_called()
+	{
+		List myList = Mockito.mock(List.class);
+
+		myList.add("one");
+		myList.add("one");
+
+		Mockito.verify(myList, Mockito.times(2)).add("one");
 
 	}
 
