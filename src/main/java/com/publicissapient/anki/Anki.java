@@ -18,7 +18,15 @@ public class Anki
 		boxesManager.getRedBox().addCards(deck.getCardList());
 	}
 
-  public Card pullCard() {
-    return boxesManager.getRedBox().getCards().iterator().next();
-  }
+	public Card pullCard()
+	{
+		return boxesManager.getRedBox().getCards().iterator().next();
+	}
+
+	public void correctAnswer(Card card)
+	{
+		boxesManager.getRedBox().getCards().remove(card);
+		boxesManager.getGreenBox().getCards().add(card);
+	}
+
 }

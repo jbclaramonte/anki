@@ -81,5 +81,25 @@ public class AnkiTest
 		Assert.assertFalse(anki.getBoxesManager().getRedBox().getCards().contains(pullCard));
 	}
 
+	@Test
+	public void test_reponse_for_card_is_not_correct()
+	{
+		// Given
+		Anki anki = new Anki();
+		Deck deck = new Deck();
+		Card card1 = new Card("Q1", "R1");
+		Card card2 = new Card("Q2", "R2");
+		deck.addCard(card1);
+		deck.addCard(card2);
+		anki.load(deck);
+		Card pullCard = anki.pullCard();
+
+		// When
+		anki.uncorrectAnswer(pullCard);
+
+		// Then
+		Assert.assertTrue(anki.getBoxesManager().getRedBox().getCards().contains(pullCard));
+		Assert.assertFalse(anki.getBoxesManager().getGreenBox().getCards().contains(pullCard));
+	}
 
 }
