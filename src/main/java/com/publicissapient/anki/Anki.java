@@ -1,36 +1,16 @@
 package com.publicissapient.anki;
 
-import com.publicissapient.anki.domain.BoxesManager;
-import com.publicissapient.anki.domain.Card;
 import com.publicissapient.anki.domain.Deck;
+import com.publicissapient.anki.domain.Session;
 
 public class Anki
 {
-	private BoxesManager boxesManager = new BoxesManager();
+	private Session session = null;
 
-	public BoxesManager getBoxesManager()
+	public Session load(Deck deck)
 	{
-		return boxesManager;
-	}
-
-	public void load(Deck deck)
-	{
-		boxesManager.getRedBox().addCards(deck.getCardList());
-	}
-
-	public Card pullCard()
-	{
-		return boxesManager.getRedBox().getCards().iterator().next();
-	}
-
-	public void correctAnswer(Card card)
-	{
-		boxesManager.getRedBox().getCards().remove(card);
-		boxesManager.getGreenBox().getCards().add(card);
-	}
-
-	public void uncorrectAnswer(Card card) {
-		boxesManager.getRedBox().getCards().remove(card);
-		boxesManager.getOrangeBox().getCards().add(card);
+		session = new Session();
+		session.load(deck);
+		return session;
 	}
 }
