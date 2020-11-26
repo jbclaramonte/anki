@@ -29,4 +29,8 @@ public class Anki
 		boxesManager.getGreenBox().getCards().add(card);
 	}
 
+	public void uncorrectAnswer(Card card) {
+		boxesManager.getRedBox().getCards().remove(card);
+		boxesManager.getOrangeBox().getCards().add(card);
+	}
 }
