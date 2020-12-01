@@ -93,4 +93,18 @@ public class AnkiTest
 		Mockito.verify(sessionIO, Mockito.times(1)).save(session);
 	}
 
+	@Test
+	public void test_when_session_is_loaded_load_interface_is_called()
+	{
+		// Given
+		SessionIO sessionIO = Mockito.mock(SessionIO.class);
+		Anki anki = new Anki();
+
+		// When
+		Session session = anki.loadSession("MySession");
+
+		// Then
+		Mockito.verify(sessionIO, Mockito.times(1)).load("MySession");
+	}
+
 }
