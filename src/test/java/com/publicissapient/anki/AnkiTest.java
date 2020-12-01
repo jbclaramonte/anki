@@ -125,4 +125,23 @@ public class AnkiTest
 		Mockito.verify(deckIO, Mockito.times(1)).load("MyDeckName");
 	}
 
+	@Test
+	public void test_when_deckAnglais_is_loaded_session_contains_deckAnglais_in_redbox()
+	{
+		// Given
+		FileDeckIO deckIO = new FileDeckIO();
+		Anki anki = new Anki(null, deckIO);
+
+		// When
+		Session session = anki.loadSessionByDeck("Anglais");
+
+		// Then
+		Assert.assertNotNull(session);
+		Assert.assertEquals(4, session.getBoxesManager().getRedBox().getCards().size());
+		Assert.assertEquals(0, session.getBoxesManager().getGreenBox().getCards().size());
+		Assert.assertEquals(0, session.getBoxesManager().getOrangeBox().getCards().size());
+
+		Card card1 = new Card("Question1", "Answer1");
+		Assert.assertTrue(session.getBoxesManager().getRedBox().getCards().contains(card1));
+	}
 }
