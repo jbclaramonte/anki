@@ -1,8 +1,16 @@
 package com.publicissapient.anki.domain;
 
+import com.publicissapient.anki.spi.SessionIO;
+
 public class Session
 {
-	private BoxesManager boxesManager = new BoxesManager();
+	private BoxesManager	boxesManager	= new BoxesManager();
+	private SessionIO		io				= null;
+
+	public Session(SessionIO p_io)
+	{
+		this.io = p_io;
+	}
 
 	public BoxesManager getBoxesManager()
 	{
@@ -29,5 +37,10 @@ public class Session
 	{
 		boxesManager.getRedBox().getCards().remove(card);
 		boxesManager.getOrangeBox().getCards().add(card);
+	}
+
+	public void save()
+	{
+		this.io.save(this);
 	}
 }

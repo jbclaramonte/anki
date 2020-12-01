@@ -1,7 +1,5 @@
 package com.publicissapient.anki;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -9,6 +7,7 @@ import org.mockito.Mockito;
 import com.publicissapient.anki.domain.Card;
 import com.publicissapient.anki.domain.Deck;
 import com.publicissapient.anki.domain.Session;
+import com.publicissapient.anki.spi.SessionIO;
 
 public class AnkiTest
 {
@@ -85,7 +84,7 @@ public class AnkiTest
 	{
 		// Given
 		SessionIO sessionIO = Mockito.mock(SessionIO.class);
-		Session session = new Session(sessionPersister);
+		Session session = new Session(sessionIO);
 
 		// When
 		session.save();

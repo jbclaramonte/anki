@@ -9,7 +9,7 @@ public class Anki
 
 	public Session load(Deck deck)
 	{
-		session = new Session();
+		session = new Session(null);
 		session.load(deck);
 		return session;
 	}
