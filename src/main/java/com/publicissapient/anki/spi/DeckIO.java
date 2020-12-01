@@ -4,5 +4,5 @@ import com.publicissapient.anki.domain.Deck;
 
 public interface DeckIO
 {
-	Deck load(String deckName);
+	Deck load(String deckName) throws DeckIOException;
 }

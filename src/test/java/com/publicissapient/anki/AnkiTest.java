@@ -1,5 +1,7 @@
 package com.publicissapient.anki;
 
+import com.publicissapient.anki.spi.DeckIOException;
+import com.publicissapient.anki.spi.file.FileDeckIO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -109,8 +111,7 @@ public class AnkiTest
 	}
 
 	@Test
-	public void test_when_deck_is_loaded_by_name_deckio_is_called()
-	{
+	public void test_when_deck_is_loaded_by_name_deckio_is_called() throws DeckIOException {
 		// Given
 		SessionIO sessionIO = Mockito.mock(SessionIO.class);
 		DeckIO deckIO = Mockito.mock(DeckIO.class);
@@ -127,7 +128,7 @@ public class AnkiTest
 
 	@Test
 	public void test_when_deckAnglais_is_loaded_session_contains_deckAnglais_in_redbox()
-	{
+			throws DeckIOException {
 		// Given
 		FileDeckIO deckIO = new FileDeckIO();
 		Anki anki = new Anki(null, deckIO);

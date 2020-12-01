@@ -3,6 +3,7 @@ package com.publicissapient.anki;
 import com.publicissapient.anki.domain.Deck;
 import com.publicissapient.anki.domain.Session;
 import com.publicissapient.anki.spi.DeckIO;
+import com.publicissapient.anki.spi.DeckIOException;
 import com.publicissapient.anki.spi.SessionIO;
 
 public class Anki
@@ -31,8 +32,7 @@ public class Anki
 		return this.session;
 	}
 
-	public Session loadSessionByDeck(String deckName)
-	{
+	public Session loadSessionByDeck(String deckName) throws DeckIOException {
 		this.session = new Session(this.sessionIO);
 		Deck deck = deckIO.load(deckName);
 
