@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import com.publicissapient.anki.domain.Card;
 import com.publicissapient.anki.domain.Deck;
 import com.publicissapient.anki.domain.Session;
+import com.publicissapient.anki.spi.DeckIO;
 import com.publicissapient.anki.spi.SessionIO;
 
 public class AnkiTest
@@ -16,7 +17,7 @@ public class AnkiTest
 	public void test_reponse_for_card_is_correct()
 	{
 		// Given
-		Anki anki = new Anki(null);
+		Anki anki = new Anki(null, null);
 		Deck deck = new Deck();
 		Card card1 = new Card("Q1", "R1");
 		Card card2 = new Card("Q2", "R2");
@@ -38,7 +39,7 @@ public class AnkiTest
 	public void test_reponse_for_card_is_not_correct()
 	{
 		// Given
-		Anki anki = new Anki(null);
+		Anki anki = new Anki(null, null);
 		Deck deck = new Deck();
 		Card card1 = new Card("Q1", "R1");
 		Card card2 = new Card("Q2", "R2");
@@ -60,7 +61,7 @@ public class AnkiTest
 	public void test_when_we_load_a_deck_for_the_first_time_a_session_is_created()
 	{
 		// Given
-		Anki anki = new Anki(null);
+		Anki anki = new Anki(null, null);
 		Deck deck = new Deck();
 		Card card1 = new Card("Q1", "R1");
 		Card card2 = new Card("Q2", "R2");
@@ -98,7 +99,7 @@ public class AnkiTest
 	{
 		// Given
 		SessionIO sessionIO = Mockito.mock(SessionIO.class);
-		Anki anki = new Anki(sessionIO);
+		Anki anki = new Anki(sessionIO, null);
 
 		// When
 		Session session = anki.loadSession("MySession");
@@ -113,6 +114,8 @@ public class AnkiTest
 		// Given
 		SessionIO sessionIO = Mockito.mock(SessionIO.class);
 		DeckIO deckIO = Mockito.mock(DeckIO.class);
+		Mockito.when(deckIO.load("MyDeckName")).thenReturn(new Deck());
+
 		Anki anki = new Anki(sessionIO, deckIO);
 
 		// When
