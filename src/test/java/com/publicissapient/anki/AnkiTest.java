@@ -16,13 +16,13 @@ public class AnkiTest
 	public void test_reponse_for_card_is_correct()
 	{
 		// Given
-		Anki anki = new Anki();
+		Anki anki = new Anki(null);
 		Deck deck = new Deck();
 		Card card1 = new Card("Q1", "R1");
 		Card card2 = new Card("Q2", "R2");
 		deck.addCard(card1);
 		deck.addCard(card2);
-		Session ankiSession = anki.load(deck);
+		Session ankiSession = anki.loadDeck(deck);
 		Card pullCard = ankiSession.pullCard();
 
 		// When
@@ -38,13 +38,13 @@ public class AnkiTest
 	public void test_reponse_for_card_is_not_correct()
 	{
 		// Given
-		Anki anki = new Anki();
+		Anki anki = new Anki(null);
 		Deck deck = new Deck();
 		Card card1 = new Card("Q1", "R1");
 		Card card2 = new Card("Q2", "R2");
 		deck.addCard(card1);
 		deck.addCard(card2);
-		Session ankiSession = anki.load(deck);
+		Session ankiSession = anki.loadDeck(deck);
 		Card pullCard = ankiSession.pullCard();
 
 		// When
@@ -60,7 +60,7 @@ public class AnkiTest
 	public void test_when_we_load_a_deck_for_the_first_time_a_session_is_created()
 	{
 		// Given
-		Anki anki = new Anki();
+		Anki anki = new Anki(null);
 		Deck deck = new Deck();
 		Card card1 = new Card("Q1", "R1");
 		Card card2 = new Card("Q2", "R2");
@@ -68,7 +68,7 @@ public class AnkiTest
 		deck.addCard(card2);
 
 		// When
-		Session session = anki.load(deck);
+		Session session = anki.loadDeck(deck);
 
 		// Then
 		Assert.assertTrue(session.getBoxesManager().getRedBox().getCards().contains(card1));
@@ -98,13 +98,28 @@ public class AnkiTest
 	{
 		// Given
 		SessionIO sessionIO = Mockito.mock(SessionIO.class);
-		Anki anki = new Anki();
+		Anki anki = new Anki(sessionIO);
 
 		// When
 		Session session = anki.loadSession("MySession");
 
 		// Then
 		Mockito.verify(sessionIO, Mockito.times(1)).load("MySession");
+	}
+
+	@Test
+	public void test_when_deck_is_loaded_by_name_deckio_is_called()
+	{
+		// Given
+		SessionIO sessionIO = Mockito.mock(SessionIO.class);
+		DeckIO deckIO = Mockito.mock(DeckIO.class);
+		Anki anki = new Anki(sessionIO, deckIO);
+
+		// When
+		Session session = anki.loadSessionByDeck("MyDeckName");
+
+		// Then
+		Mockito.verify(deckIO, Mockito.times(1)).load("MyDeckName");
 	}
 
 }
