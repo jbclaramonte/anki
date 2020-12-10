@@ -1,9 +1,7 @@
 package com.publicissapient.anki;
 
-import com.publicissapient.anki.spi.DeckIOException;
-import com.publicissapient.anki.spi.file.FileDeckIO;
 import java.io.File;
-import java.nio.file.Paths;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -12,7 +10,11 @@ import com.publicissapient.anki.domain.Card;
 import com.publicissapient.anki.domain.Deck;
 import com.publicissapient.anki.domain.Session;
 import com.publicissapient.anki.spi.DeckIO;
+import com.publicissapient.anki.spi.DeckIOException;
 import com.publicissapient.anki.spi.SessionIO;
+import com.publicissapient.anki.spi.SessionIOException;
+import com.publicissapient.anki.spi.file.FileDeckIO;
+import com.publicissapient.anki.spi.file.FileSessionIO;
 
 public class AnkiTest
 {
@@ -113,7 +115,8 @@ public class AnkiTest
 	}
 
 	@Test
-	public void test_when_deck_is_loaded_by_name_deckio_is_called() throws DeckIOException {
+	public void test_when_deck_is_loaded_by_name_deckio_is_called() throws DeckIOException
+	{
 		// Given
 		SessionIO sessionIO = Mockito.mock(SessionIO.class);
 		DeckIO deckIO = Mockito.mock(DeckIO.class);
@@ -129,8 +132,8 @@ public class AnkiTest
 	}
 
 	@Test
-	public void test_when_deckAnglais_is_loaded_session_contains_deckAnglais_in_redbox()
-			throws DeckIOException {
+	public void test_when_deckAnglais_is_loaded_session_contains_deckAnglais_in_redbox() throws DeckIOException
+	{
 		// Given
 		FileDeckIO deckIO = new FileDeckIO();
 		Anki anki = new Anki(null, deckIO);
@@ -149,20 +152,28 @@ public class AnkiTest
 	}
 
 	@Test
-	public void test_when_session_is_saved_then_a_file_is_created() {
+	public void test_when_session_is_saved_then_a_file_is_created() throws SessionIOException, DeckIOException
+	{
 
 		// Given
 		String sessionLocation = System.getProperty("user.dir");
 		FileSessionIO fileSessionIO = new FileSessionIO(sessionLocation);
 		Anki anki = new Anki(fileSessionIO, null);
+
+		Deck deck = new Deck();
+		Card card1 = new Card("Q1", "R1");
+		Card card2 = new Card("Q2", "R2");
+		deck.addCard(card1);
+		deck.addCard(card2);
+		anki.loadDeck(deck);
+
 		String sessionName = "MySession";
 
 		// When
 		anki.saveSession(sessionName);
 
 		// Then
-		String dir = anki.getSessionLocation();
-		File file = new File(dir + "/" + sessionName);
+		File file = new File(sessionLocation + "/" + sessionName);
 		Assert.assertTrue(file.exists());
 
 	}

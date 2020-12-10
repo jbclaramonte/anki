@@ -6,5 +6,8 @@ public interface SessionIO
 {
 	void save(Session session);
 
-  Session load(String mySession);
+	void save(Session session, String fileName) throws SessionIOException;
+
+	Session load(String mySession);
+
 }

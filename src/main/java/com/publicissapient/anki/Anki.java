@@ -5,6 +5,7 @@ import com.publicissapient.anki.domain.Session;
 import com.publicissapient.anki.spi.DeckIO;
 import com.publicissapient.anki.spi.DeckIOException;
 import com.publicissapient.anki.spi.SessionIO;
+import com.publicissapient.anki.spi.SessionIOException;
 
 public class Anki
 {
@@ -32,11 +33,21 @@ public class Anki
 		return this.session;
 	}
 
-	public Session loadSessionByDeck(String deckName) throws DeckIOException {
+	public Session loadSessionByDeck(String deckName) throws DeckIOException
+	{
 		this.session = new Session(this.sessionIO);
 		Deck deck = deckIO.load(deckName);
 
 		this.session.load(deck);
 		return this.session;
+	}
+
+	public void saveSession(String sessionName) throws SessionIOException
+	{
+		if ((null != this.sessionIO) && (null != this.session))
+		{
+			this.sessionIO.save(session, sessionName);
+		}
+
 	}
 }
