@@ -2,6 +2,8 @@ package com.publicissapient.anki;
 
 import com.publicissapient.anki.spi.DeckIOException;
 import com.publicissapient.anki.spi.file.FileDeckIO;
+import java.io.File;
+import java.nio.file.Paths;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -145,4 +147,24 @@ public class AnkiTest
 		Card card1 = new Card("Question1", "Answer1");
 		Assert.assertTrue(session.getBoxesManager().getRedBox().getCards().contains(card1));
 	}
+
+	@Test
+	public void test_when_session_is_saved_then_a_file_is_created() {
+
+		// Given
+		String sessionLocation = System.getProperty("user.dir");
+		FileSessionIO fileSessionIO = new FileSessionIO(sessionLocation);
+		Anki anki = new Anki(fileSessionIO, null);
+		String sessionName = "MySession";
+
+		// When
+		anki.saveSession(sessionName);
+
+		// Then
+		String dir = anki.getSessionLocation();
+		File file = new File(dir + "/" + sessionName);
+		Assert.assertTrue(file.exists());
+
+	}
+
 }
