@@ -1,8 +1,6 @@
 package com.publicissapient.anki.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.publicissapient.anki.spi.SessionIO;
-import com.publicissapient.anki.spi.SessionIOException;
 import com.publicissapient.anki.spi.file.FileSessionIO;
 import com.publicissapient.anki.spi.file.FileSessionIOException;
 
@@ -88,7 +86,6 @@ public class Session
 	}
 
 	public void save() throws FileSessionIOException {
-		System.out.println("save() : io=" + this.io);
 		this.io.save(this);
 	}
 

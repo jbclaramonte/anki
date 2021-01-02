@@ -95,14 +95,11 @@ public class SparkWebApplication {
 
     private void setupRoute_PullCard(){
         get("/pullCard", (request, response) -> {
-            System.out.println("setupRoute_PullCard");
 
             Session session = anki.getSession();
 
             if(null != session){
-
                 Card card = session.pullCard();
-                System.out.println("card = " + card);
 
                 if(null != card){
                     return card.getQuestion();
