@@ -9,6 +9,7 @@ import com.publicissapient.anki.spi.SessionIOException;
 
 public class Anki
 {
+	public static final String DEFAULT_VAR_DIRECTORY = 	System.getProperty("user.dir") + "/var";
 
 	private final SessionIO	sessionIO;
 	private final DeckIO	deckIO;
@@ -25,6 +26,10 @@ public class Anki
 		session = new Session(sessionIO);
 		session.load(deck);
 		return session;
+	}
+
+	public Session getSession(){
+		return this.session;
 	}
 
 	public Session loadSession(String mySession)
@@ -48,6 +53,5 @@ public class Anki
 		{
 			this.sessionIO.save(session, sessionName);
 		}
-
 	}
 }

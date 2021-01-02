@@ -2,6 +2,7 @@ package com.publicissapient.anki;
 
 import java.io.File;
 
+import com.publicissapient.anki.spi.file.FileSessionIOException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -18,9 +19,8 @@ import com.publicissapient.anki.spi.file.FileSessionIO;
 
 public class AnkiTest
 {
-
 	@Test
-	public void test_reponse_for_card_is_correct()
+	public void test_response_for_card_is_correct()
 	{
 		// Given
 		Anki anki = new Anki(null, null);
@@ -42,7 +42,7 @@ public class AnkiTest
 	}
 
 	@Test
-	public void test_reponse_for_card_is_not_correct()
+	public void test_response_for_card_is_not_correct()
 	{
 		// Given
 		Anki anki = new Anki(null, null);
@@ -87,8 +87,7 @@ public class AnkiTest
 	}
 
 	@Test
-	public void test_when_session_is_saved_save_interface_is_called()
-	{
+	public void test_when_session_is_saved_save_interface_is_called() throws FileSessionIOException {
 		// Given
 		SessionIO sessionIO = Mockito.mock(SessionIO.class);
 		Session session = new Session(sessionIO);
@@ -147,7 +146,7 @@ public class AnkiTest
 		Assert.assertEquals(0, session.getBoxesManager().getGreenBox().getCards().size());
 		Assert.assertEquals(0, session.getBoxesManager().getOrangeBox().getCards().size());
 
-		Card card1 = new Card("Question1", "Answer1");
+		Card card1 = new Card("How is called the UK flag?", "The Union Jack");
 		Assert.assertTrue(session.getBoxesManager().getRedBox().getCards().contains(card1));
 	}
 
